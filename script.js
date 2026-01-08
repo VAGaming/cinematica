@@ -147,3 +147,27 @@ function setupFAQ() {
 }
 
 document.addEventListener('DOMContentLoaded', setupFAQ);
+
+
+//Background Section xem chùa
+async function setupFreeTrialBackground() {
+    const background = document.getElementById('free-trial-background');
+
+    try {
+        const [page1, page2] = await Promise.all([
+            fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=1`).then(r => r.json()),
+            fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=2`).then(r => r.json())
+        ]);
+
+        const movies = [...page1.results, ...page2.results];
+
+        background.innerHTML = movies.map(movie => `
+            <img src="${IMG_URL + movie.poster_path}" alt="poster" loading="lazy">
+        `).join('');
+    }
+    catch(err) {
+        console.error("Lỗi tải ảnh:", err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupFreeTrialBackground);
