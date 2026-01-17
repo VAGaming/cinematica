@@ -7,16 +7,19 @@
   --color-border-v2: #262626;
   --color-dot-not-active: #333333;
 
-  --color-button-primary: #e50000;
+  --color-button-primary: #ffc300;
 
   --text-primary: #ffffff;
   --text-secondary: #bfbfbf;
   --text-sub: #999999;
 
+  --fs-xs: 0.8125rem;
+  --fs-s: 1rem;
   --fs-xm: 1.125rem;
   --fs-x0m: 1.25rem;
   --fs-x1m: 1.375rem;
   --fs-x2m: 1.5rem;
+  --fs-x4m: 2.25rem;
   --fs-xl: 2.375rem;
   --fs-x1l: 3rem;
   --fs-2xl: 3.625rem;
@@ -24,7 +27,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Manrope", system-ui, ans-serif;
+  font-family: "Be Vietnam Pro", system-ui, ans-serif;
 }
 body {
   box-sizing: border-box;
@@ -44,6 +47,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
   z-index: 10;
 
   .container {
@@ -59,11 +67,11 @@ body {
 }
 .nav-menu {
   display: flex;
-  background-color: var(--bg-second);
+  /* background-color: var(--bg-second); */
   padding: 0.625rem 2.5rem;
   border-radius: 12px;
-  border: 4px solid var(--color-border);
-  gap: 1.875rem;
+  /* border: 4px solid var(--color-border); */
+  gap: 2rem;
 }
 .nav-menu a {
   text-decoration: none;
@@ -74,6 +82,7 @@ body {
   font-weight: 400;
 }
 .nav-menu a.active {
+  border: 1px solid var(--bg-active);
   background-color: var(--bg-active);
   font-weight: 500;
   color: var(--text-primary);

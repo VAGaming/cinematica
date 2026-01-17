@@ -36,103 +36,142 @@ async function setupHero() {
         console.err("Lỗi tải poster phim.");
     }
 }
+document,addEventListener('DOMContentLoaded', setupHero);
 
-document.addEventListener('DOMContentLoaded', setupHero);
+// const GENRE_URL = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
+// const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
+// let currentSlide = 0;
 
-const GENRE_URL = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
-const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
+// //Mục phim
+// async function setupCategories() {
+//     try {
+//         const res = await fetch(GENRE_URL);
+//         const genreData = await res.json();
+//         const genres = genreData.genres;
 
-let currentSlide = 0;
+//         const container = document.getElementById('categories-container');
 
-//Mục phim
-async function setupCategories() {
-    try {
-        const res = await fetch(GENRE_URL);
-        const genreData = await res.json();
-        const genres = genreData.genres;
+//         // Mỗi mục 4 phim
+//         const categoryCards = await Promise.all(genres.map(async (genre) => {
+//             const movieRes = await fetch(`${DISCOVER_URL}&with_genres=${genre.id}`);
+//             const movieData = await movieRes.json();
+//             const fourMovies = movieData.results.slice(0, 4);
 
-        const container = document.getElementById('categories-container');
+//             return `
+//                 <div class="category-card">
+//                     <div class="category-images">
+//                         ${fourMovies.map(m => `<img src="${IMG_URL + m.poster_path}" alt="movie">`).join('')}
+//                         <div class="category-images-fade-out"></div>
+//                     </div>
+//                     <div class="category-info">
+//                         <span>${genre.name}</span>
+//                         <i class="fa-solid fa-arrow-right"></i>
+//                     </div>
+//                 </div>
+//             `;
+//         }));
 
-        // Mỗi mục 4 phim
-        const categoryCards = await Promise.all(genres.map(async (genre) => {
-            const movieRes = await fetch(`${DISCOVER_URL}&with_genres=${genre.id}`);
-            const movieData = await movieRes.json();
-            const fourMovies = movieData.results.slice(0, 4);
+//         container.innerHTML = categoryCards.join('');
+//         setupSliderLogic(genres.length);
 
-            return `
-                <div class="category-card">
-                    <div class="category-images">
-                        ${fourMovies.map(m => `<img src="${IMG_URL + m.poster_path}" alt="movie">`).join('')}
-                        <div class="category-images-fade-out"></div>
-                    </div>
-                    <div class="category-info">
-                        <span>${genre.name}</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div>
-            `;
-        }));
-
-        container.innerHTML = categoryCards.join('');
-        setupSliderLogic(genres.length);
-
-    } catch (err) {
-        console.error("Lỗi tải Categories:", err);
-    }
-}
-
-// Slider
-function setupSliderLogic(totalItems) {
-    const container = document.getElementById('categories-container');
-    const nextBtn = document.getElementById('next-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const dotIndicator = document.getElementById('dot-indicator');
+//     } catch (err) {
+//         console.error("Lỗi tải Categories:", err);
+//     }
+// }
+// // Slider
+// function setupSliderLogic(totalItems) {
+//     const container = document.getElementById('categories-container');
+//     const nextBtn = document.getElementById('next-btn');
+//     const prevBtn = document.getElementById('prev-btn');
+//     const dotIndicator = document.getElementById('dot-indicator');
     
-    const itemsPerPage = 5;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+//     const itemsPerPage = 5;
+//     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // Dot
-    dotIndicator.innerHTML = ''; 
-    for (let i = 0; i < totalPages; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active'); 
-        dotIndicator.appendChild(dot);
-    }
+//     // Dot
+//     dotIndicator.innerHTML = ''; 
+//     for (let i = 0; i < totalPages; i++) {
+//         const dot = document.createElement('div');
+//         dot.classList.add('dot');
+//         if (i === 0) dot.classList.add('active'); 
+//         dotIndicator.appendChild(dot);
+//     }
 
-    // Cập nhật trạng thái dấu gạch
-    const updateDots = (index) => {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-    };
+//     // Cập nhật trạng thái dấu gạch
+//     const updateDots = (index) => {
+//         const dots = document.querySelectorAll('.dot');
+//         dots.forEach((dot, i) => {
+//             dot.classList.toggle('active', i === index);
+//         });
+//     };
 
-    // Nút Next
-    nextBtn.onclick = () => {
-        if (currentSlide < totalPages - 1) {
-            currentSlide++;
-            container.style.transform = `translateX(-${currentSlide * 100}%)`;
-            updateDots(currentSlide);
-        }
-    };
+//     // Nút Next
+//     nextBtn.onclick = () => {
+//         if (currentSlide < totalPages - 1) {
+//             currentSlide++;
+//             container.style.transform = `translateX(-${currentSlide * 100}%)`;
+//             updateDots(currentSlide);
+//         }
+//     };
 
-    // Nút Prev
-    prevBtn.onclick = () => {
-        if (currentSlide > 0) {
-            currentSlide--;
-            container.style.transform = `translateX(-${currentSlide * 100}%)`;
-            updateDots(currentSlide);
-        }
-    };
+//     // Nút Prev
+//     prevBtn.onclick = () => {
+//         if (currentSlide > 0) {
+//             currentSlide--;
+//             container.style.transform = `translateX(-${currentSlide * 100}%)`;
+//             updateDots(currentSlide);
+//         }
+//     };
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     setupHero(); 
+//     setupCategories(); 
+// });
+const API_ENDPOINTS = {
+  popular: `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=vi-VN`,
+  now_playing: `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=vi-VN`,
+  top_rated: `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=vi-VN`
+};
+
+async function loadMovies(type, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  try {
+    const res = await fetch(API_ENDPOINTS[type]);
+    const data = await res.json();
+    
+    container.innerHTML = data.results.slice(0, 20).map(movie => {
+      const releaseYear = movie.release_date ? movie.release_date.split('-')[0] : '';
+      const rating = movie.vote_average.toFixed(1);
+
+      return `
+        <a href="detail.html?id=${movie.id}&type=movie" class="movie-card">
+          <img src="${IMG_URL + movie.backdrop_path}" alt="${movie.title}" loading="lazy">
+          <div class="movie-card-overlay">
+            <h4>${movie.title}</h4>
+            <div class="movie-card-meta">
+              <span class="rating-star"><i class="fa-solid fa-star"></i> ${rating}</span>
+              <span class="year">${releaseYear}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  } catch (err) {
+    console.error(`Lỗi:`, err);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupHero(); 
-    setupCategories(); 
+  loadMovies('popular', 'popular-slider');
+  loadMovies('now_playing', 'now-playing-slider');
+  loadMovies('top_rated', 'top-rated-slider');
 });
 
+//---------------------------
 function setupFAQ() {
   const faqItems = document.querySelectorAll('.faq-item');
 
