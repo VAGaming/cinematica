@@ -148,7 +148,7 @@ async function loadMovies(type, containerId) {
       const rating = movie.vote_average.toFixed(1);
 
       return `
-        <a href="detail.html?id=${movie.id}&type=movie" class="movie-card">
+        <a href="movie-detail.html?id=${movie.id}&type=movie" class="movie-card">
           <img src="${IMG_URL + movie.backdrop_path}" alt="${movie.title}" loading="lazy">
           <div class="movie-card-overlay">
             <h4>${movie.title}</h4>
@@ -171,6 +171,38 @@ document.addEventListener('DOMContentLoaded', () => {
   loadMovies('top_rated', 'top-rated-slider');
 });
 
+
+// async function loadTV(containerId) {
+//   const container = document.getElementById(containerId);
+//   if (!container) return;
+
+//   try {
+//     const res = await fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=vi-VN`);
+//     const data = await res.json();
+    
+//     container.innerHTML = data.results.slice(0, 20).map(movie => {
+//       const releaseYear = movie.first_air_date ? movie.first_air_date.split('-')[0] : '';
+//       const rating = movie.vote_average.toFixed(1);
+
+//       return `
+//         <a href="tv-detail.html?id=${movie.id}&type=tv" class="movie-card">
+//           <img src="${IMG_URL + movie.backdrop_path}" alt="${movie.name}" loading="lazy">
+//           <div class="movie-card-overlay">
+//             <h4>${movie.name}</h4>
+//             <div class="movie-card-meta">
+//               <span class="rating-star"><i class="fa-solid fa-star"></i> ${rating}</span>
+//               <span class="year">${releaseYear}</span>
+//             </div>
+//           </div>
+//         </a>
+//       `;
+//     }).join('');
+//   } catch (err) {
+//     console.error(`Lỗi:`, err);
+//   }
+// }
+
+document.addEventListener('DOMContentLoaded', loadTV('tv-slider'));
 //---------------------------
 function setupFAQ() {
   const faqItems = document.querySelectorAll('.faq-item');
