@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./logo-icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-repeat"
+    />
+
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="hero-wrapper">
+      <header class="main-header">
+        <div class="container">
+          <div class="header-logo">
+            <a href="./index.html" style="display: flex; align-items: center;">
+              <img src="./logo-icon.svg" alt="logo" />
+              <img
+                class="logo-text"
+                src="./images/absolutecinema.svg"
+                alt="absolutecinema"
+              />
+            </a>
+          </div>
+          <nav class="nav-menu">
+            <a href="./index.html" class="active">Trang chủ</a>
+            <a href="./filter.html">Thể loại</a>
+            <a href="./usermanage.html">Hỗ trợ</a>
+          </nav>
+          <div class="header-icons">
+            <button class="header-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="user-menu">
+              <button class="header-icon" id="userBtn" type="button">
+                <i class="fa-regular fa-user"></i>
+              </button>
+
+              <div id="userDropdown" class="user-dropdown hidden">
+                <div id="loggedOutView">
+                  <button id="loginBtn">Login</button>
+                  <button id="signupBtn">Sign Up</button>
+                </div>
+
+                <div id="loggedInView" class="hidden">
+                  <p id="userEmail"></p>
+                  <button id="logoutBtn">Logout</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="header-icon">
+              <i class="fa-regular fa-bell"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="hero-background">
+        <div class="background-scroller">
+          <div class="marquee-row row-1" id="marquee-row-1"></div>
+          <div class="marquee-row row-2" id="marquee-row-2"></div>
+          <div class="marquee-row row-3" id="marquee-row-3"></div>
+          <div class="marquee-row row-4" id="marquee-row-4"></div>
+        </div>
+
+        <div class="abstract-overlay"></div>
+
+        <div class="fade-out-top"></div>
+        <div class="fade-out-bottom"></div>
+
+        <div class="center-logo">
+          <img src="./images/logo-icon-blur.svg" alt="Center Logo" />
+        </div>
+      </div>
+
+      <div class="hero-content container">
+        <div class="text-container">
+          <h1>Trang web xem phim số 1 BCN</h1>
+          <p>
+            AbsoluteCinema là nơi tốt nhất để thưởng thức các bộ phim và chương
+            trình yêu thích của bạn, mọi lúc, mọi nơi. Với AbsoluteCinema, bạn
+            có thể tận hưởng vô vàn nội dung đa dạng, bao gồm các bom tấn mới
+            nhất, phim kinh điển, các chương trình truyền hình nổi tiếng và
+            nhiều hơn nữa. Bạn cũng có thể tạo danh sách xem của riêng mình,
+            giúp bạn dễ dàng tìm thấy nội dung mình muốn xem.
+          </p>
+        </div>
+        <a href="./login.html" style="text-decoration: none"
+          ><button class="btn-primary">
+            <i class="fa-solid fa-play"></i>
+            <span>Xem ngay và luôn</span>
+          </button></a
+        >
+      </div>
+    </div>
+
+    <section class="movies-section">
+      <div class="container">
+        <div class="movies-section-head">
+          <h2 class="movies-section-title">Đang Hot</h2>
+        </div>
+        <div class="movie-slider" id="popular-slider"></div>
+      </div>
+    </section>
+
+    <section class="movies-section">
+      <div class="container">
+        <div class="movies-section-head">
+          <h2 class="movies-section-title">Mới ra lò</h2>
+        </div>
+        <div class="movie-slider" id="now-playing-slider"></div>
+      </div>
+    </section>
+
+    <section class="movies-section">
+      <div class="container">
+        <div class="movies-section-head">
+          <h2 class="movies-section-title">
+            Không xem thì phí - Xem rồi thì thôi
+          </h2>
+        </div>
+        <div class="movie-slider" id="top-rated-slider"></div>
+      </div>
+    </section>
+
+    <section class="movies-section">
+      <div class="container">
+        <div class="movies-section-head">
+          <h2 class="movies-section-title">test tv</h2>
+        </div>
+        <div class="movie-slider" id="tv-slider"></div>
+      </div>
+    </section>
+
+    <section class="devices">
+      <div class="container">
+      <div class="device-text">
+        <h2>Chúng tôi cung cấp trải nghiệm phát trực tuyến trên nhiều thiết bị khác nhau.</h2>
+        <p>
+        Với AbsoluteCinema, bạn có thể thưởng thức các bộ phim và chương trình yêu thích của mình bất kỳ lúc nào, bất kỳ nơi đâu. Nền tảng của chúng tôi được thiết kế để tương thích với nhiều thiết bị, đảm bảo bạn không bao giờ bỏ lỡ một khoảnh khắc giải trí.
+        </p>
+      </div>
+
+      <div class="devices-container">
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/smartphone.svg" alt="icon" />
+          <h3>Điện thoại thông minh</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho cả điện thoại thông minh Android và iOS. Tải xuống ứng dụng của chúng tôi từ Google Play Store hoặc Apple App Store
+        </p>
+        </div>
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/tablet.svg" alt="icon" />
+          <h3>Máy tính bảng</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho cả máy tính bảng Android và iOS. Tải xuống ứng dụng của chúng tôi từ Google Play Store hoặc Apple App Store
+        </p>
+        </div>
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/smartTV.svg" alt="icon" />
+          <h3>TV thông minh</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho cả TV thông minh Android và iOS. Tải xuống ứng dụng của chúng tôi từ Google Play Store hoặc Apple App Store
+        </p>
+        </div>
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/laptop.svg" alt="icon" />
+          <h3>Máy tính xách tay</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho cả máy tính xách tay. Truy cập trang web của chúng tôi hoặc tải xuống ứng dụng từ các cửa hàng ứng dụng
+        </p>
+        </div>
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/gaming.svg" alt="icon" />
+          <h3>Máy chơi game</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho các máy chơi game hiện đại. Tải xuống ứng dụng của chúng tôi từ các cửa hàng ứng dụng tương ứng
+        </p>
+        </div>
+        <div class="device-card">
+        <div class="device-card-main">
+          <img src="images/smartphone.svg" alt="icon" />
+          <h3>Điện thoại thông minh</h3>
+        </div>
+        <p>
+          AbsoluteCinema được tối ưu hóa cho cả điện thoại thông minh Android và iOS. Tải xuống ứng dụng của chúng tôi từ Google Play Store hoặc Apple App Store
+        </p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+      <div class="faq-header">
+        <div class="faq-title-box">
+        <h2>Các câu hỏi thường gặp</h2>
+        <p>
+          Có câu hỏi? Chúng tôi có câu trả lời! Hãy xem phần Câu hỏi thường gặp của chúng tôi để tìm câu trả lời cho các câu hỏi phổ biến nhất về AbsoluteCinema.
+        </p>
+        </div>
+        <button class="btn-faq">Đặt một câu hỏi</button>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-column">
+        <div class="faq-item">
+          <div class="faq-num">01</div>
+          <div class="faq-content">
+          <h3 class="faq-question">AbsoluteCinema là gì?</h3>
+          <p class="faq-answer">
+            AbsoluteCinema là một dịch vụ phát trực tuyến cho phép bạn xem phim và chương trình theo yêu cầu.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">02</div>
+          <div class="faq-content">
+          <h3 class="faq-question">AbsoluteCinema có giá bao nhiêu?</h3>
+          <p class="faq-answer">
+            AbsoluteCinema cung cấp nhiều gói để phù hợp với nhu cầu của bạn, từ cơ bản đến cao cấp.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">03</div>
+          <div class="faq-content">
+          <h3 class="faq-question">
+            Nội dung nào có sẵn trên AbsoluteCinema?
+          </h3>
+          <p class="faq-answer">
+            Chúng tôi cung cấp một thư viện phim, chương trình TV và nội dung gốc rộng lớn.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">04</div>
+          <div class="faq-content">
+          <h3 class="faq-question">Tôi có thể xem AbsoluteCinema ở đâu?</h3>
+          <p class="faq-answer">
+            Bạn có thể xem trên bất kỳ thiết bị nào có kết nối internet bằng cách sử dụng ứng dụng của chúng tôi.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        </div>
+
+        <div class="faq-column">
+        <div class="faq-item">
+          <div class="faq-num">05</div>
+          <div class="faq-content">
+          <h3 class="faq-question">Tôi có thể đăng ký AbsoluteCinema như thế nào?</h3>
+          <p class="faq-answer">
+            Truy cập trang web của chúng tôi hoặc tải xuống ứng dụng để tạo tài khoản.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">06</div>
+          <div class="faq-content">
+          <h3 class="faq-question">Bản dùng thử miễn phí của AbsoluteCinema là gì?</h3>
+          <p class="faq-answer">
+            Bản dùng thử miễn phí của chúng tôi cho phép bạn khám phá thư viện đầy đủ trong thời gian hạn chế.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">07</div>
+          <div class="faq-content">
+          <h3 class="faq-question">
+            Tôi có thể liên hệ với hỗ trợ AbsoluteCinema như thế nào?
+          </h3>
+          <p class="faq-answer">
+            Bạn có thể liên hệ với đội hỗ trợ của chúng tôi qua email hoặc trò chuyện trực tiếp 24/7.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-num">08</div>
+          <div class="faq-content">
+          <h3 class="faq-question">Các phương thức thanh toán là gì?</h3>
+          <p class="faq-answer">
+            Chúng tôi chấp nhận các thẻ tín dụng chính, thẻ ghi nợ và ví kỹ thuật số.
+          </p>
+          </div>
+          <button class="faq-toggle">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="free-trial-section">
+      <div class="container">
+      <div class="free-trial-inner">
+        <div id="free-trial-background"></div>
+        <div class="free-trial-overlay"></div>
+        <div class="free-trial-content">
+        <h2>Bắt đầu bản dùng thử miễn phí của bạn ngay hôm nay!</h2>
+        <p>
+          Đây là một lời kêu gọi hành động rõ ràng và ngắn gọn khuyến khích người dùng đăng ký bản dùng thử miễn phí của AbsoluteCinema.
+        </p>
+        </div>
+        <a href="#" class="free-trial-button">Xem chùa ngay</a>
+      </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+      <div class="footer-top">
+        <div class="footer-column">
+        <h4>Trang chủ</h4>
+        <ul>
+          <li><a href="./filter.html">Thể loại</a></li>
+          <li><a href="./index.html">Thiết bị</a></li>
+          <li><a href="./index.html">Giá cả</a></li>
+          <li><a href="./index.html">Câu hỏi thường gặp</a></li>
+        </ul>
+        </div>
+
+        <div class="footer-column">
+        <h4>Phim</h4>
+        <ul>
+          <li><a href="./filter.html">Thể loại</a></li>
+          <li><a href="./index.html">Xu hướng</a></li>
+          <li><a href="./index.html">Phát hành mới</a></li>
+          <li><a href="./index.html">Phổ biến</a></li>
+        </ul>
+        </div>
+
+        <div class="footer-column">
+        <h4>Chương trình</h4>
+        <ul>
+          <li><a href="./filter.html">Thể loại</a></li>
+          <li><a href="./index.html">Xu hướng</a></li>
+          <li><a href="./index.html">Phát hành mới</a></li>
+          <li><a href="./index.html">Phổ biến</a></li>
+        </ul>
+        </div>
+
+        <div class="footer-column">
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="./usermanage.html">Liên hệ chúng tôi</a></li>
+        </ul>
+        </div>
+
+        <div class="footer-column">
+        <h4>Kết nối với chúng tôi</h4>
+        <div class="social-links">
+          <a href="#" class="social-icon"
+          ><i class="fa-brands fa-facebook"></i
+          ></a>
+          <a href="#" class="social-icon"
+          ><i class="fa-brands fa-twitter"></i
+          ></a>
+          <a href="#" class="social-icon"
+          ><i class="fa-brands fa-linkedin-in"></i
+          ></a>
+        </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copyright">
+        <p>@2026 abscinema, Bản quyền thuộc về chúng tôi</p>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Điều khoản sử dụng</a>
+            <a href="#">Chính sách riêng tư</a>
+            <a href="#">Chính sách bản quyền</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="./script.js"></script>
+    <script type="module" src="./dropdown.js"></script>
+  </body>
+</html>
