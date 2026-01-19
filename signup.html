@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký</title>
+    <link rel="icon" type="image/x-icon" href="./images/logo-icon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="preconnect" href="https://image.tmdb.org" />
+  </head>
+  <body>
+    <div id="bg"></div>
+    <div id="glass-board">
+      <a href="index.html"
+        ><img src="images/absolutecinema.svg" alt="" id="absolutecinema"
+      /></a>
+      <div id="form-container">
+        <div id="top">
+          <h2>Chào mừng</h2>
+          <h3>Hãy điền thông tin để tiếp tục</h3>
+        </div>
+        <div id="form">
+          <form action="" method="post" autocomplete="on">
+            <div class="input-group">
+              <label for="username">Tên người dùng</label>
+              <br />
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nhập tên người dùng"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="password">Mật khẩu</label>
+              <br />
+              <div class="input-group-password">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  aria-describedby="togglePassword"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+                <button
+                  type="button"
+                  id="togglePassword"
+                  aria-label="showPassword"
+                  aria-pressed="false"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div id="tos-container">
+              <input type="checkbox" id="checkbox" required />
+              <p>
+                Tôi đồng ý với các
+                <a href="404.html" id="tos">Điều khoản Dịch vụ</a>
+              </p>
+            </div>
+            <div id="error-message"></div>
+            <button type="submit" id="login-button">Đăng ký</button>
+            <hr />
+            <div id="signup-link">
+              <span>Bạn đã có tài khoản?</span>
+              <a href="login.html" id="signup">Đăng nhập</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/bg.js"></script>
+  <script
+    src="https://kit.fontawesome.com/801e0a2150.js"
+    crossorigin="anonymous"
+  ></script>
+</html>
