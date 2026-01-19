@@ -474,6 +474,7 @@
   z-index: 3;
 }
 .free-trial-content {
+  width: 80%;
   h2 {
     font-size: var(--fs-x1l);
     font-weight: 700;
