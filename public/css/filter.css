@@ -1,3 +1,30 @@
+:root {
+  --bg-main: #141414;
+  --bg-second: #0f0f0f;
+  --bg-active: #1a1a1a;
+
+  --color-border: #1f1f1f;
+  --color-border-v2: #262626;
+  --color-dot-not-active: #333333;
+
+  --color-button-primary: #ffc300;
+
+  --text-primary: #ffffff;
+  --text-secondary: #bfbfbf;
+  --text-sub: #999999;
+
+  --fs-xs: 0.8125rem;
+  --fs-s: 1rem;
+  --fs-xm: 1.125rem;
+  --fs-x0m: 1.25rem;
+  --fs-x1m: 1.375rem;
+  --fs-x2m: 1.5rem;
+  --fs-x3m: 1.875rem;
+  --fs-x4m: 2.25rem;
+  --fs-xl: 2.375rem;
+  --fs-x1l: 3rem;
+  --fs-2xl: 3.625rem;
+}
 html,
 body {
   margin: 0;
@@ -6,16 +33,73 @@ body {
   overflow: hidden;
   background: #0e0e0e;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 
-header {
-  padding: 12px;
-  background: #121212;
+.main-header {
+  width: 100%;
+  padding: 1.875rem 0;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  /* z-index: 10; */
+
+  .container {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 256px;
+    justify-content: center;
+  }
+}
+.header-logo {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 0.2rem;
+}
+.nav-menu {
+  display: flex;
+  padding: 0.625rem 2.5rem;
+  border-radius: 12px;
+  gap: 2rem;
+}
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: var(--fs-xm);
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 400;
+}
+.nav-menu a.active {
+  border: 1px solid var(--bg-active);
+  background-color: var(--bg-active);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.header-icons {
+  display: flex;
+  gap: 1.875rem;
+}
+.header-icon {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
 
+.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
 select,
 input {
   background: #1e1e1e;
@@ -28,7 +112,8 @@ input {
 .movies {
   height: calc(100vh - 60px);
   overflow-y: auto;
-  padding: 16px;
+  margin-top: 20px;
+  padding: 0px 128px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 16px;
@@ -48,6 +133,9 @@ input {
 .movie:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8);
+  h4 {
+    color: #ffc300;
+  }
 }
 
 .movies a {
@@ -77,8 +165,8 @@ input {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #f5c518;
-  color: #000;
+  background: rgba(18, 18, 18, 0.5);
+  color: #ffffff;
   font-size: 12px;
   padding: 4px 6px;
   border-radius: 6px;
@@ -157,4 +245,42 @@ input {
 
 #sentinel {
   height: 1px;
+}
+
+.hidden {
+  display: none;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -75px;
+  margin-top: 8px;
+  background: #121212;
+  border-radius: 6px;
+  padding: 12px;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.user-dropdown button {
+  width: 100%;
+  margin-top: 6px;
+  background-color: #0f0f0f;
+  color: #ffc300;
+border: "none";
+}
+
+.filter-controls {
+  margin-top: 128px;
+  margin-left: 128px;
+  display: flex;
+  gap: 10px;
+}
+.user-dropdown button:hover {
+  cursor: pointer;
 }

@@ -2,178 +2,82 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>TMDB Infinite Scroll Movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bộ lọc</title>
+    <link rel="icon" type="image/x-icon" href="./logo-icon.svg" />
     <link rel="stylesheet" href="css/filter.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <header>
-      <select id="genre">
-        <option value="">Genre</option>
-      </select>
-      <input id="year" type="number" placeholder="Year" min="1881" max="2025" />
-      <select id="country">
-        <option value="">Country</option>
-      </select>
+    <header class="main-header">
+      <div class="container">
+        <div class="header-logo">
+          <a href="./index.html" style="display: flex; align-items: center">
+            <img src="./logo-icon.svg" alt="logo" />
+            <img
+              class="logo-text"
+              src="./images/absolutecinema.svg"
+              alt="absolutecinema"
+            />
+          </a>
+        </div>
+        <nav class="nav-menu">
+          <a href="./index.html">Trang chủ</a>
+          <a href="./filter.html" class="active">Thể loại</a>
+        </nav>
+        <div class="header-icons">
+          <button class="header-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <div class="user-menu">
+            <button class="header-icon" id="userBtn" type="button">
+              <i class="fa-regular fa-user"></i>
+            </button>
+
+            <div id="userDropdown" class="user-dropdown hidden">
+              <div id="loggedOutView">
+                <button id="loginBtn">Login</button>
+                <button id="signupBtn">Sign Up</button>
+              </div>
+
+              <div id="loggedInView" class="hidden">
+                <p id="userEmail"></p>
+                <button id="logoutBtn">Logout</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="header-icon">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+        </div>
+      </div>
     </header>
+
+    <div class="filter-controls">
+      <select id="genre">
+        <option value="">Thể loại</option>
+      </select>
+      <input id="year" type="number" placeholder="Năm" min="1881" max="2025" />
+      <select id="country">
+        <option value="">Quốc gia</option>
+      </select>
+    </div>
 
     <div id="movies" class="movies"></div>
     <div id="sentinel"></div>
 
-    <script>
-      const API_KEY = "dbdaab4b0de7600840565a024e442974";
-      const BASE = "https://api.themoviedb.org/3";
-      const IMG = "https://image.tmdb.org/t/p/w300";
-      const FALLBACK = "logo-icon.svg";
-
-      let page = 1;
-      let totalPages = 1;
-      let loading = false;
-      let debounce;
-
-      const genreMap = {};
-      const ageCache = {};
-
-      const movies = document.getElementById("movies");
-      const sentinel = document.getElementById("sentinel");
-
-      async function loadGenres() {
-        const r = await fetch(`${BASE}/genre/movie/list?api_key=${API_KEY}`);
-        const d = await r.json();
-        d.genres.forEach((g) => {
-          genreMap[g.id] = g.name;
-          genre.innerHTML += `<option value="${g.id}">${g.name}</option>`;
-        });
-      }
-
-      async function loadCountries() {
-        const r = await fetch(
-          `${BASE}/configuration/countries?api_key=${API_KEY}`,
-        );
-        const d = await r.json();
-        ["US", "GB", "FR", "JP", "KR", "IN", "CN", "VN", "TH", "DE"].forEach(
-          (code) => {
-            const c = d.find((x) => x.iso_3166_1 === code);
-            if (c)
-              country.innerHTML += `<option value="${code}">${c.english_name}</option>`;
-          },
-        );
-      }
-
-      async function fetchMovies(reset = false) {
-        if (loading || page > totalPages) return;
-        loading = true;
-
-        if (reset) {
-          movies.innerHTML = "";
-          page = 1;
-          totalPages = 1;
-        }
-
-        showSkeletons();
-
-        let url = `${BASE}/discover/movie?api_key=${API_KEY}&page=${page}`;
-        if (genre.value) url += `&with_genres=${genre.value}`;
-        if (country.value) url += `&with_origin_country=${country.value}`;
-        if (year.value) url += `&primary_release_year=${year.value}`;
-
-        const r = await fetch(url);
-        const d = await r.json();
-
-        totalPages = d.total_pages;
-        removeSkeletons();
-        render(d.results);
-
-        loading = false;
-      }
-
-      function render(items) {
-        items.forEach((m) => {
-          const a = document.createElement("a");
-          a.href = `movie-detail.html?id=${m.id}&type=movie`;
-
-          const card = document.createElement("div");
-          card.className = "movie";
-          card.innerHTML = `
-            <div class="movie-poster">
-              <img src="${m.poster_path ? IMG + m.poster_path : FALLBACK}">
-              <div class="badge-rating">⭐ ${m.vote_average?.toFixed(1) || "NR"}</div>
-              <div class="badge-age">NR</div>
-              <div class="badge-chip">${genreMap[m.genre_ids?.[0]] || "Movie"}</div>
-            </div>
-            <div class="movie-info">
-              <h4>${m.title}</h4>
-              <small>${m.release_date?.slice(0, 4) || "N/A"}</small>
-            </div>
-          `;
-
-          loadAge(card, m.id);
-          a.appendChild(card);
-          movies.appendChild(a);
-        });
-
-        movies.appendChild(sentinel);
-      }
-
-      async function loadAge(card, id) {
-        if (ageCache[id]) {
-          card.querySelector(".badge-age").textContent = ageCache[id];
-          return;
-        }
-        const r = await fetch(
-          `${BASE}/movie/${id}/release_dates?api_key=${API_KEY}`,
-        );
-        const d = await r.json();
-        const us = d.results.find((x) => x.iso_3166_1 === "US");
-        const cert = us?.release_dates?.[0]?.certification || "NR";
-        ageCache[id] = cert;
-        card.querySelector(".badge-age").textContent = cert;
-      }
-
-      function showSkeletons() {
-        for (let i = 0; i < 8; i++) {
-          movies.insertAdjacentHTML(
-            "beforeend",
-            `
-            <div class="skeleton skeleton-item">
-              <div class="skeleton-img"></div>
-              <div class="skeleton-text"></div>
-            </div>
-          `,
-          );
-        }
-      }
-
-      function removeSkeletons() {
-        document.querySelectorAll(".skeleton-item").forEach((e) => e.remove());
-      }
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !loading && page < totalPages) {
-            page++;
-            fetchMovies();
-          }
-        },
-        {
-          root: movies,
-          rootMargin: "300px",
-        },
-      );
-
-      observer.observe(sentinel);
-
-      genre.onchange = country.onchange = () => fetchMovies(true);
-      year.oninput = () => {
-        clearTimeout(debounce);
-        debounce = setTimeout(() => fetchMovies(true), 500);
-      };
-
-      (async () => {
-        await loadGenres();
-        await loadCountries();
-        fetchMovies(true);
-      })();
-    </script>
+    <script type="module" src="dropdown.js"></script>
+    <script
+      src="https://kit.fontawesome.com/801e0a2150.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/filter.js"></script>
   </body>
 </html>

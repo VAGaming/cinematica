@@ -88,7 +88,6 @@
   font-size: var(--fs-xm);
 }
 
-/* SSIDEBAR */
 .sidebar-card {
   background: var(--bg-active);
   border: 1px solid var(--color-border-v2);
@@ -156,7 +155,6 @@
   object-fit: cover;
   border-radius: 8px;
 }
-/* SECTION CAST */
 .main-content {
   min-width: 0;
 }
@@ -193,7 +191,6 @@
   overflow: hidden;
 }
 
-/* SECTION TAP PHIM CHO SHOW */
 .episodes-section {
   background-color: var(--bg-active);
   border-radius: 12px;
@@ -268,3 +265,4 @@
   padding: 0.75rem;
   border-radius: 50%;
 }
+
