@@ -17,22 +17,18 @@ const loginBtn = document.getElementById("loginBtn");
 const signupBtn = document.getElementById("signupBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
-/* Toggle dropdown */
 userBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   dropdown.classList.toggle("hidden");
 });
 
-/* Close when clicking outside */
 
 document.addEventListener("click", () => {
   dropdown.classList.add("hidden");
 });
 
-/* Prevent closing when clicking inside */
 dropdown.addEventListener("click", (e) => e.stopPropagation());
 
-/* Auth state */
 onAuthStateChanged(auth, (user) => {
   if (user) {
     loggedOutView.classList.add("hidden");
@@ -44,7 +40,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-/* Actions */
 loginBtn.onclick = () => (window.location.href = "login.html");
 signupBtn.onclick = () => (window.location.href = "signup.html");
 

@@ -6,8 +6,56 @@
     <title>Document</title>
   </head>
   <body>
-    <h2>User Management (Admin)</h2>
-    <ul id="userList"></ul>
+    <header class="main-header">
+      <div class="container">
+        <div class="header-logo">
+          <a href="./index.html" style="display: flex; align-items: center">
+            <img src="./logo-icon.svg" alt="logo" />
+            <img
+              class="logo-text"
+              src="./images/absolutecinema.svg"
+              alt="absolutecinema"
+            />
+          </a>
+        </div>
+        <nav class="nav-menu">
+          <a href="./index.html">Trang chủ</a>
+          <a href="./filter.html">Thể loại</a>
+          <a href="./usermanage.html" class="active">Hỗ trợ</a>
+        </nav>
+        <div class="header-icons">
+          <button class="header-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <div class="user-menu">
+            <button class="header-icon" id="userBtn" type="button">
+              <i class="fa-regular fa-user"></i>
+            </button>
+
+            <div id="userDropdown" class="user-dropdown hidden">
+              <div id="loggedOutView">
+                <button id="loginBtn">Login</button>
+                <button id="signupBtn">Sign Up</button>
+              </div>
+
+              <div id="loggedInView" class="hidden">
+                <p id="userEmail"></p>
+                <button id="logoutBtn">Logout</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="header-icon">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container" style="padding: 20px">
+      <h2>User Management (Admin)</h2>
+      <ul id="userList"></ul>
+    </div>
 
     <script type="module" src="js/usermanage.js"></script>
   </body>
