@@ -8,7 +8,7 @@ const IMG_URL_ORIGINAL = "https://image.tmdb.org/t/p/original";
 ================================ */
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
-const type = urlParams.get("type"); // movie | tv
+const type = urlParams.get("type"); 
 
 if (!id || !["movie", "tv"].includes(type)) {
   console.error("Invalid media params");
@@ -20,7 +20,7 @@ if (!id || !["movie", "tv"].includes(type)) {
 async function getMovieDetail() {
   try {
     const res = await fetch(
-      `${BASE_URL}/${type}/${id}?api_key=${API_KEY}&language=vi-VN&append_to_response=credits`,
+      `${BASE_URL}/${type}/${id}?api_key=${API_KEY}&language=vi-VN&append_to_response=credits.videos&append_to_response=credits`,
     );
 
     if (!res.ok) throw new Error("TMDB fetch failed");
@@ -33,12 +33,63 @@ async function getMovieDetail() {
     renderCast(data.credits?.cast);
     renderCrew(data);
 
+    let videos = data.videos?.results || [];
+    
+    if (videos.length === 0) {
+        //gọi thêm language khác
+        const videoRes = await fetch(`${BASE_URL}/${type}/${id}/videos?api_key=${API_KEY}`);
+        const videoData = await videoRes.json();
+        videos = videoData.results || [];
+    }
+
+    setupVideoPlayer(videos);
+
     if (type === "tv") {
       fetchEpisodes();
     }
   } catch (err) {
     console.error("Lỗi lấy dữ liệu phim:", err);
   }
+}
+
+/* ===============================
+   VIDEO PLAYER LOGIC
+================================ */
+function setupVideoPlayer(videos = []) {
+  const playBtn = document.querySelector(".btn-primary"); 
+  const modal = document.getElementById("video-modal");
+  const iframe = document.getElementById("trailer-video");
+  const closeBtn = document.querySelector(".close-modal");
+
+  if (!playBtn || !modal || !iframe) return;
+
+  const trailer = videos.find(
+    (v) => v.site === "YouTube" && (v.type === "Trailer" || v.type === "Teaser")
+  );
+
+  if (!trailer) {
+    playBtn.innerHTML = `<i class="fa-solid fa-circle-info"></i> Không có trailer`;
+    playBtn.style.opacity = "0.6";
+    return;
+  }
+
+  playBtn.onclick = () => {
+    iframe.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&modestbranding=1&rel=0`;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; 
+  };
+
+  const closeModal = () => {
+    modal.style.display = "none";
+    iframe.src = ""; 
+    document.body.style.overflow = "auto";
+  };
+
+  if (closeBtn) closeBtn.onclick = closeModal;
+  
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
 }
 
 /* ===============================
