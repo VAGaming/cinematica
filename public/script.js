@@ -265,6 +265,7 @@ async function setupFreeTrialBackground() {
 
 document.addEventListener("DOMContentLoaded", setupFreeTrialBackground);
 
+//BUTTON USER-------------------------------------------------------------------
 const btn = document.getElementById("userBtn");
 const modal = document.getElementById("userModal");
 
@@ -278,7 +279,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-
+// Xử lí các nút bấm khi đăng nhập và chưa đăng nhập---------------------------------
 import { auth } from "./js/firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 

@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="./css/detail.css" />
     <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/search.css" />
   </head>
   <body>
     <header class="main-header">
@@ -236,6 +237,25 @@
         </div>
       </div>
     </div>
+
+    <div id="search-modal" class="modal">
+      <div class="search-modal-content">
+        <span class="close-search">&times;</span>
+        <div class="search-box">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Nhập tên phim bạn muốn tìm......"
+            autocomplete="off"
+          />
+          <button id="search-submit-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/search.js"></script>
     <script src="./js/detail.js"></script>
   </body>
 </html>

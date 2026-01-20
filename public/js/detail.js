@@ -73,15 +73,22 @@ function setupVideoPlayer(videos = []) {
     return;
   }
 
+  const trailerUrl = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&modestbranding=1&rel=0`;
   playBtn.onclick = () => {
-    iframe.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&modestbranding=1&rel=0`;
+    // iframe.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&modestbranding=1&rel=0`;
+   
+    //do iframe bị gắn src 2 lần nên replace cmnl chứ ko gán
+    iframe.contentWindow.location.replace(trailerUrl);
+
     modal.style.display = "flex";
     document.body.style.overflow = "hidden"; 
   };
 
   const closeModal = () => {
     modal.style.display = "none";
-    iframe.src = ""; 
+    // iframe.src = ""; 
+    // giống ở trên thì khi đóng cũng repalce cmnl chứ ko gán
+    // iframe.contentWindow.location.replace('about:blank');
     document.body.style.overflow = "auto";
   };
 

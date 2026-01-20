@@ -39,6 +39,9 @@ async function loadCountries() {
   );
 }
 
+const urlParams = new URLSearchParams(window.location.search);
+const queryParam = urlParams.get("query");
+
 async function fetchMovies(reset = false) {
   if (loading || page > totalPages) return;
   loading = true;
@@ -51,13 +54,24 @@ async function fetchMovies(reset = false) {
 
   showSkeletons();
 
-  let url = `${BASE}/discover/movie?api_key=${API_KEY}&page=${page}`;
-  if (genre.value) url += `&with_genres=${genre.value}`;
-  if (country.value) url += `&with_origin_country=${country.value}`;
-  if (year.value) url += `&primary_release_year=${year.value}`;
+  let url = "";
+  
+  if (queryParam) {
+    url = `${BASE}/search/multi?api_key=${API_KEY}&language=vi-VN&query=${encodeURIComponent(queryParam)}&page=${page}`;
+    
+    // const headTitle = document.querySelector(".movies-section-title");
+    // if (headTitle) headTitle.innerText = `Kết quả cho: "${queryParam}"`;
+  } else {
+    url = `${BASE}/discover/movie?api_key=${API_KEY}&language=vi-VN&page=${page}`;
+    if (genre.value) url += `&with_genres=${genre.value}`;
+    if (country.value) url += `&with_origin_country=${country.value}`;
+    if (year.value) url += `&primary_release_year=${year.value}`;
+  }
 
   const r = await fetch(url);
   const d = await r.json();
+
+  // const results = d.results.filter(item => item.media_type !== 'person');
 
   totalPages = d.total_pages;
   removeSkeletons();
@@ -68,8 +82,9 @@ async function fetchMovies(reset = false) {
 
 function render(items) {
   items.forEach((m) => {
+    const mediaType = m.media_type || "movie";
     const a = document.createElement("a");
-    a.href = `movie-detail.html?id=${m.id}&type=movie`;
+    a.href = `movie-detail.html?id=${m.id}&type=${mediaType}`;
 
     const card = document.createElement("div");
     card.className = "movie";
