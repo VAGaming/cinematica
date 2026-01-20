@@ -42,11 +42,99 @@ async function setupHero() {
 }
 (document, addEventListener("DOMContentLoaded", setupHero));
 
-const GENRE_URL = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
-const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
+// const GENRE_URL = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
+// const DISCOVER_URL = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
-let currentSlide = 0;
+// let currentSlide = 0;
 
+<<<<<<< HEAD
+// //Mục phim
+// async function setupCategories() {
+//     try {
+//         const res = await fetch(GENRE_URL);
+//         const genreData = await res.json();
+//         const genres = genreData.genres;
+
+//         const container = document.getElementById('categories-container');
+
+//         // Mỗi mục 4 phim
+//         const categoryCards = await Promise.all(genres.map(async (genre) => {
+//             const movieRes = await fetch(`${DISCOVER_URL}&with_genres=${genre.id}`);
+//             const movieData = await movieRes.json();
+//             const fourMovies = movieData.results.slice(0, 4);
+
+//             return `
+//                 <div class="category-card">
+//                     <div class="category-images">
+//                         ${fourMovies.map(m => `<img src="${IMG_URL + m.poster_path}" alt="movie">`).join('')}
+//                         <div class="category-images-fade-out"></div>
+//                     </div>
+//                     <div class="category-info">
+//                         <span>${genre.name}</span>
+//                         <i class="fa-solid fa-arrow-right"></i>
+//                     </div>
+//                 </div>
+//             `;
+//         }));
+
+//         container.innerHTML = categoryCards.join('');
+//         setupSliderLogic(genres.length);
+
+//     } catch (err) {
+//         console.error("Lỗi tải Categories:", err);
+//     }
+// }
+// // Slider
+// function setupSliderLogic(totalItems) {
+//     const container = document.getElementById('categories-container');
+//     const nextBtn = document.getElementById('next-btn');
+//     const prevBtn = document.getElementById('prev-btn');
+//     const dotIndicator = document.getElementById('dot-indicator');
+    
+//     const itemsPerPage = 5;
+//     const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+//     // Dot
+//     dotIndicator.innerHTML = ''; 
+//     for (let i = 0; i < totalPages; i++) {
+//         const dot = document.createElement('div');
+//         dot.classList.add('dot');
+//         if (i === 0) dot.classList.add('active'); 
+//         dotIndicator.appendChild(dot);
+//     }
+
+//     // Cập nhật trạng thái dấu gạch
+//     const updateDots = (index) => {
+//         const dots = document.querySelectorAll('.dot');
+//         dots.forEach((dot, i) => {
+//             dot.classList.toggle('active', i === index);
+//         });
+//     };
+
+//     // Nút Next
+//     nextBtn.onclick = () => {
+//         if (currentSlide < totalPages - 1) {
+//             currentSlide++;
+//             container.style.transform = `translateX(-${currentSlide * 100}%)`;
+//             updateDots(currentSlide);
+//         }
+//     };
+
+//     // Nút Prev
+//     prevBtn.onclick = () => {
+//         if (currentSlide > 0) {
+//             currentSlide--;
+//             container.style.transform = `translateX(-${currentSlide * 100}%)`;
+//             updateDots(currentSlide);
+//         }
+//     };
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     setupHero();
+//     setupCategories();
+// });
+=======
 //Mục phim
 async function setupCategories() {
   try {
@@ -134,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHero();
   setupCategories();
 });
+>>>>>>> e419ef420c2d8d86ecec2f71a42b5d085a8eb38f
 const API_ENDPOINTS = {
   popular: `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=vi-VN`,
   now_playing: `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=vi-VN`,
@@ -272,8 +361,35 @@ btn.addEventListener("click", () => {
   modal.style.display = modal.style.display === "flex" ? "none" : "flex";
 });
 
+<<<<<<< HEAD
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".user-menu")) {
+      modal.style.display = "none";
+    }
+  });
+
+import { auth } from "./js/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user; 
+});
+
+document.getElementById("btn-play-hero").addEventListener("click", (e) => {
+  e.preventDefault();
+  
+  if (currentUser) {
+    window.location.href = "filter.html";
+  } else {
+    window.location.href = "login.html";
+  }
+});
+=======
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".user-menu")) {
     modal.style.display = "none";
   }
 });
+>>>>>>> e419ef420c2d8d86ecec2f71a42b5d085a8eb38f
