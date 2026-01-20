@@ -148,7 +148,7 @@
     }
   }
 
-  button {
+  a {
     background-color: var(--color-button-primary);
     color: black;
     padding: 1.125rem 1.5rem;
